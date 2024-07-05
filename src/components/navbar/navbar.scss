@@ -49,6 +49,9 @@
     @include sm {
       background-color: transparent;
     }
+    @include md {
+      background-color: transparent;
+    }
 
     a {
       padding: 12px 24px;

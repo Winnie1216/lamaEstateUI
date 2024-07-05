@@ -1,4 +1,4 @@
-@import "./responsive.scss";
+@import "../../responsive.scss";
 
 .layout {
   height: 100vh;
@@ -11,22 +11,22 @@
   flex-direction: column;
 
   @include lg {
-    background-color: rgb(241, 203, 188);
+    // background-color: rgb(241, 203, 188);
     max-width: 1280px;
   }
 
   @include md {
-    background-color: rgb(197, 197, 248);
+    // background-color: rgb(197, 197, 248);
     max-width: 768px;
   }
 
   @include sm {
-    background-color: rgb(243, 194, 194);
+    // background-color: rgb(243, 194, 194);
     max-width: 640px;
   }
   // 为了两边留出spacing
   .content {
-    flex: 1;
+    height: calc(100vh - 100px);
   }
 }
 // 需要屏幕尺寸从大到小排列
