@@ -101,15 +101,15 @@ export const singlePostData = {
     bedRooms: 2,
     bathroom: 1,
     size: 861,
-    latitude: 51.5074,
-    longitude: -0.1278,
-    city: "London",
-    address: "1234 Broadway St",
+    latitude: -34.4228,
+    longitude: 150.8933,
+    city: "Wollongong",
+    address: "4 Cliff Rd, Wollongong NSW 2500, Australia",
     school: "250m away",
     bus: "100m away",
     restaurant: "50m away",
     description:
-        "Future alike hill pull picture swim magic chain seed engineer nest outer raise bound easy poetry gain loud weigh me recognize farmer bare danger. actually put square leg vessels earth engine matter key cup indeed body film century shut place environment were stage vertical roof bottom lady function breeze darkness beside tin view local breathe carbon swam declared magnet escape has from pile apart route coffee storm someone hold space use ahead sheep jungle closely natural attached part top grain your grade trade corn salmon trouble new bend most teacher range anybody every seat fifteen eventually",
+        "Welcome to this charming rental property, perfect for those seeking a comfortable and convenient living space. This home features 2 spacious bedrooms and 1 well-appointed bathroom, with a total living area of 80 square feet, offering a cozy environment to call home. The property is highly responsive to renters' needs, ensuring that any issues or concerns are addressed promptly. Pet lovers will be pleased to know that pets are allowed, creating a welcoming environment for your furry friends. To qualify for this rental, the total household income must be at least three times the rent, ensuring affordability and financial stability for our tenants. The property is ideally located near several key amenities, including a reputable school just 250 meters away, a bus stop only 100 meters from your doorstep for easy access to public transportation, and a popular restaurant 200 meters away for a variety of dining options. This rental property combines comfort, convenience, and a pet-friendly policy to provide a wonderful living experience. Don't miss out on this great opportunity!",
 };
 export const userData = {
     id: 1,

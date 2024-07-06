@@ -1,9 +1,13 @@
+@import "../../responsive.scss";
 .slider {
   display: flex;
   width: 100%;
   height: 350px;
   gap: 20px;
   .fullSlider {
+    @include sm {
+      z-index: 999;
+    }
     position: absolute;
     width: 100vw;
     height: 100vh;
@@ -52,9 +56,13 @@
     object-fit: cover;
     border-radius: 10px;
     cursor: pointer;
+    transition: all 0.4s ease;
   }
   .bigImage {
     flex: 3;
+    &:hover {
+      scale: (1.05);
+    }
   }
   .smallImages {
     flex: 1;
@@ -64,6 +72,9 @@
     gap: 20px;
     img {
       height: 100px;
+      &:hover {
+        scale: (1.05);
+      }
     }
   }
 }
