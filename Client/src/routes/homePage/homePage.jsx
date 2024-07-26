@@ -1,13 +1,17 @@
+import { useContext } from "react";
 import SearchBar from "../../components/searchBar/SearchBar";
 import "./homePage.scss";
+import { AuthContext } from "../../context/AuthContext.jsx";
 
 function HomePage() {
+  const { currentUser } = useContext(AuthContext);
+
   return (
     <div className="homePage">
       <div className="textContainer">
         <div className="wrapper">
           <div className="title">
-            <h1>Find Real Estate & GEt Your Dream Place Find Real Estate</h1>
+            <h1>Find Real Estate & Get Your Dream Place Find Real Estate</h1>
           </div>
           <p>
             Start Your Journey to Your Dream Home Here! Whether you’re looking
