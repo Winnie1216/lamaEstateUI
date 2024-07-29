@@ -21,3 +21,31 @@ model User {
   avatar    String?
   createdAt DateTime @default(now())
 }
+
+model Post {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  price     Int
+  img       String
+  address   String
+  city      String
+  bedroom   Int
+  bathroom  Int
+  latitude  String
+  longitude String
+  type      Type
+  property  Property
+  createdAt DateTime @default(now())
+}
+
+enum Type {
+  buy
+  rent
+}
+
+enum Property {
+  apartment
+  house
+  condo
+  land
+}

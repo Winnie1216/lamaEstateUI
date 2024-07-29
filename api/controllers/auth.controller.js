@@ -41,6 +41,7 @@ export const login = async (req, res) => {
             id: user.id,
         }, process.env.JWT_SECRETKEY, { expiresIn: age })
         const { password: userPassword, ...userInfo } = user
+        console.log(`"token:"${token}`);
 
 
         res.cookie("token", token, {
@@ -50,6 +51,7 @@ export const login = async (req, res) => {
 
 
     } catch (err) {
+        console.error("Error during login:", err);
         res.status(500).json({ message: 'Fail to login!' })
     }
 
