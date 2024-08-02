@@ -1,7 +1,5 @@
-import React from "react";
 import { Routes, Route, RouterProvider } from "react-router-dom";
 import HomePage from "./routes/homePage/homePage";
-// import ListPage from "./routes/listPage/ListPage";
 import Layout from "./routes/layout/layout";
 import { createBrowserRouter } from "react-router-dom";
 import SinglePage from "./routes/singlePage/SinglePage";
@@ -10,6 +8,8 @@ import Login from "./routes/loginPage/login";
 import Register from "./routes/registerPage/register";
 import ListPage from "./routes/listPage/ListPage";
 import ProfileUpdatedPage from "./routes/profileUpdatePage/ProfileUpdatePage";
+import NewPostPage from "./routes/newPostPage/NewPostPage";
+import { singlePageLoader } from "./library/loaders";
 
 function App() {
   const router = createBrowserRouter([
@@ -28,6 +28,7 @@ function App() {
         {
           path: "/:id",
           element: <SinglePage />,
+          loader: singlePageLoader,
         },
         {
           path: "/profile",
@@ -44,6 +45,10 @@ function App() {
         {
           path: "/profile/update",
           element: <ProfileUpdatedPage />,
+        },
+        {
+          path: "/add",
+          element: <NewPostPage />,
         },
       ],
     },
