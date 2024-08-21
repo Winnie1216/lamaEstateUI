@@ -2,26 +2,32 @@ import { useState } from "react";
 import "./searchBar.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 function SearchBar() {
   const types = ["Buy", "Rent"];
 
   const [query, setQuery] = useState({
-    type: "Buy",
+    type: "buy", // 默认值为小写
     location: "",
     minPrice: 0,
     maxPrice: 0,
   });
 
   const switchType = (item) => {
-    setQuery((pre) => ({ ...pre, type: item }));
+    setQuery((pre) => ({ ...pre, type: item.toLowerCase() })); // 转为小写
   };
+
+  const handleChange = (e) => {
+    setQuery((pre) => ({ ...pre, [e.target.name]: e.target.value }));
+  };
+
   return (
     <div className="searchBar">
       <div className="type">
         {types.map((item) => (
           <button
-            className={query.type === item ? "active" : ""}
+            className={query.type === item.toLowerCase() ? "active" : ""} // 转为小写
             key={item}
             onClick={() => {
               switchType(item);
@@ -32,28 +38,39 @@ function SearchBar() {
         ))}
       </div>
       <form>
-        <input type="text" name="location" placeholder="City Location" />
+        <input
+          type="text"
+          name="city"
+          placeholder="City"
+          onChange={handleChange}
+        />
         <input
           type="number"
           name="minPrice"
           min={0}
           max={10000000}
-          placeholder="Min Price "
+          placeholder="Min Price"
+          onChange={handleChange}
         />
         <input
           type="number"
           name="maxPrice"
           min={0}
           max={10000000}
-          placeholder="Max Price "
+          placeholder="Max Price"
+          onChange={handleChange}
         />
-        <button>
-          <FontAwesomeIcon
-            icon={faSearch}
-            style={{ color: "white" }}
-            className="icon"
-          />
-        </button>
+        <Link
+          to={`/list?type=${query.type}&city=${query.city}&minPrice=${query.minPrice}&maxPrice=${query.maxPrice}`}
+        >
+          <button>
+            <FontAwesomeIcon
+              icon={faSearch}
+              style={{ color: "white" }}
+              className="icon"
+            />
+          </button>
+        </Link>
       </form>
     </div>
   );

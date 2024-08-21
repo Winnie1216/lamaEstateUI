@@ -1,13 +1,55 @@
 import Slider from "../../components/slider/slider";
 import "./singlePage.scss";
-import { singlePostData, userData } from "../../library/dummyData";
 import Map from "../../components/map/map";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import axios from "axios";
 
 function SinglePage() {
   const post = useLoaderData();
-  console.log(post);
+  const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [saved, setSaved] = useState(() => {
+    // 从 localStorage 中读取保存状态
+    const savedStatus = localStorage.getItem(`post_${post.id}_saved`);
+    return savedStatus === "true";
+  });
+
+  useEffect(() => {
+    // 当组件加载时，从 localStorage 读取状态
+    const savedStatus = localStorage.getItem(`post_${post.id}_saved`);
+    setSaved(savedStatus === "true");
+  }, [post.id]);
+
+  const handleSave = async () => {
+    if (!currentUser) {
+      navigate("/login");
+      return;
+    }
+
+    // 切换保存状态
+    const newSavedStatus = !saved;
+    setSaved(newSavedStatus);
+
+    // 更新 localStorage 中的状态
+    localStorage.setItem(`post_${post.id}_saved`, newSavedStatus);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8800/api/users/save",
+        { postId: post.id },
+        { withCredentials: true }
+      );
+      console.log(response.data.message);
+    } catch (err) {
+      console.error(
+        "Error saving post:",
+        err.response ? err.response.data : err.message
+      );
+    }
+  };
 
   return (
     <div className="singlePage">
@@ -66,7 +108,6 @@ function SinglePage() {
             </div>
             <div className="feature">
               <img src="/fee.png" alt="" />
-
               <div className="featureText">
                 <span>Income Policy</span>
                 <p>{post.postDetail.income}</p>
@@ -93,7 +134,6 @@ function SinglePage() {
           <div className="listHorizontal">
             <div className="feature">
               <img src="/school.png" alt="" />
-
               <div className="featureText">
                 <span>School</span>
                 <p>{post.postDetail.school}m away</p>
@@ -101,7 +141,6 @@ function SinglePage() {
             </div>
             <div className="feature">
               <img src="/bus.png" alt="" />
-
               <div className="featureText">
                 <span>Bus Stop</span>
                 <p>{post.postDetail.bus}m away</p>
@@ -109,7 +148,6 @@ function SinglePage() {
             </div>
             <div className="feature">
               <img src="/restaurant.png" alt="" />
-
               <div className="featureText">
                 <span>Restaurant</span>
                 <p>{post.postDetail.restaurant}m away</p>
@@ -125,9 +163,12 @@ function SinglePage() {
               <img src="/chat.png" alt="" />
               Send a Message
             </button>
-            <button>
+            <button
+              onClick={handleSave}
+              style={{ backgroundColor: saved ? "#fece51" : "white" }}
+            >
               <img src="/save.png" alt="" />
-              Save the Place
+              {saved ? "Place saved" : "Save the Place"}
             </button>
           </div>
         </div>

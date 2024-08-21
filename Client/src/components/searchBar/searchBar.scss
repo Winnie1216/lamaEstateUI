@@ -63,19 +63,29 @@
         border: 1px solid gray;
       }
     }
-    button {
-      border: none;
-      background-color: #fece51;
+    a {
       flex: 1;
-      cursor: pointer;
-      @include sm {
-        padding: 10px;
-        margin-top: 2px;
-      }
+      display: flex;
+      background-color: #fece51;
+      align-items: center;
+      justify-content: center;
+      button {
+        display: flex;
+        border: none;
+        background-color: #fece51;
+        align-items: center;
+        justify-content: center;
 
-      .icon {
-        width: 30px;
-        height: 30px;
+        cursor: pointer;
+        @include sm {
+          padding: 10px;
+          margin-top: 2px;
+        }
+
+        .icon {
+          width: 30px;
+          height: 30px;
+        }
       }
     }
   }
