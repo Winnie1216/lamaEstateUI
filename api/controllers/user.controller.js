@@ -150,25 +150,29 @@ export const savePost = async (req, res) => {
         res.status(500).json({ message: "Failed to save post!" });
     }
 };
-export const getPostWithSaveStatus = async (req, res) => {
-    const { postId } = req.params;
-    const userId = req.userId; // 从用户上下文中获取当前用户 ID
+export const profilePosts = async (req, res) => {
+
+    const tokenUserId = req.params.userId;
 
     try {
-        const post = await prisma.post.findUnique({
-            where: { id: postId },
-            include: { savedPosts: { where: { userId } } }
-        });
 
-        if (!post) {
-            return res.status(404).json({ message: 'Post not found' });
+        const userPosts = await prisma.post.findMany({
+            where: {
+                userId: tokenUserId,
+            }
         }
+        )
+        const saved = await prisma.savedPost.findMany({
+            where: { userId: tokenUserId },
+            include: { post: true }
+        })
+        const savedPosts = saved.map(item => item.post)
+        res.status(200).json({ userPosts, savedPosts })
 
-        const isSaved = post.savedPosts.length > 0;
 
-        res.json({ ...post, isSaved });
-    } catch (error) {
-        console.error("Error getting post with save status:", error);
-        res.status(500).json({ message: "Internal Server Error" });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Failed to get profile  posts!" });
     }
 };
+

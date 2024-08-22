@@ -8,14 +8,14 @@ function SearchBar() {
   const types = ["Buy", "Rent"];
 
   const [query, setQuery] = useState({
-    type: "buy", // 默认值为小写
+    type: "buy",
     location: "",
     minPrice: 0,
     maxPrice: 0,
   });
 
   const switchType = (item) => {
-    setQuery((pre) => ({ ...pre, type: item.toLowerCase() })); // 转为小写
+    setQuery((pre) => ({ ...pre, type: item.toLowerCase() }));
   };
 
   const handleChange = (e) => {
@@ -27,7 +27,7 @@ function SearchBar() {
       <div className="type">
         {types.map((item) => (
           <button
-            className={query.type === item.toLowerCase() ? "active" : ""} // 转为小写
+            className={query.type === item.toLowerCase() ? "active" : ""}
             key={item}
             onClick={() => {
               switchType(item);

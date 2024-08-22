@@ -27,10 +27,10 @@ function Card({ item }) {
               <span>{item.bathroom}bathroom</span>
             </div>
           </div>
-          <div className="icons">
+          {/* <div className="icons">
             <img className="icon" src="/save.png" alt="" />
             <img className="icon" src="/chat.png" alt="" />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

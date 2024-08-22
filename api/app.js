@@ -4,7 +4,9 @@ import authRouter from './routes/auth.route.js';
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import userRoute from './routes/user.route.js'
-import dotenv from 'dotenv';  // 导入 dotenv
+import chatRoute from './routes/chat.route.js'
+import messageRoute from './routes/message.route.js'
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -21,6 +23,8 @@ app.use(cookieParser())
 app.use("/api/posts", postRouter)
 app.use("/api/auth", authRouter)
 app.use("/api/users", userRoute)
+app.use("/api/chats", chatRoute)
+app.use("/api/messages", messageRoute)
 
 
 

@@ -1,4 +1,6 @@
 import axios from "axios"
+
+import { defer } from "react-router-dom";
 export const singlePageLoader = async ({ request, params }) => {
     const { id } = params;  //  get id from params of router
     try {
@@ -13,7 +15,7 @@ export const singlePageLoader = async ({ request, params }) => {
 
 
 export const listPageLoader = async ({ request }) => {
-    const query = new URL(request.url).searchParams; // 使用 URLSearchParams 获取查询参数
+    const query = new URL(request.url).searchParams;
     const params = {
         city: query.get('city'),
         type: query.get('type'),
@@ -31,3 +33,26 @@ export const listPageLoader = async ({ request }) => {
         throw new Error("Failed to load posts.");
     }
 }
+
+
+export const profilePageLoader = async () => {
+    try {
+        // 请求用户数据
+        const postResponse = await axios.get('http://localhost:8800/api/users/profilePosts', {
+            withCredentials: true,
+        });
+        const chatResponse = await axios.get('http://localhost:8800/api/chats', {
+            withCredentials: true,
+        });
+
+        // 返回数据
+        return {
+            userPosts: postResponse.data.userPosts,
+            savedPosts: postResponse.data.savedPosts,
+            chats: chatResponse.data,
+        };
+    } catch (err) {
+        console.error(err.response?.data || err.message);
+        throw new Error("Failed to load profile data.");
+    }
+};
